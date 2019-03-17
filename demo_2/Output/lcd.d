@@ -38,3 +38,4 @@
 ..\..\output\lcd.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
 ..\..\output\lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\..\output\lcd.o: ..\..\User\LCD\cfont.h
+..\..\output\lcd.o: ..\..\User\./systick/bsp_systick.h

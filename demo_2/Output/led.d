@@ -41,3 +41,5 @@
 ..\..\output\led.o: ..\..\User\./LCD/lcd.h
 ..\..\output\led.o: ..\..\User\common.h
 ..\..\output\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\led.o: ..\..\User\./can/can.h
+..\..\output\led.o: ..\..\User\init.h

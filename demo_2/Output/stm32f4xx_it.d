@@ -35,3 +35,12 @@
 ..\..\output\stm32f4xx_it.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h
 ..\..\output\stm32f4xx_it.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h
 ..\..\output\stm32f4xx_it.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
+..\..\output\stm32f4xx_it.o: ..\..\User\./can/can.h
+..\..\output\stm32f4xx_it.o: ..\..\User\init.h
+..\..\output\stm32f4xx_it.o: ..\..\User\led.h
+..\..\output\stm32f4xx_it.o: ..\..\User\init.h
+..\..\output\stm32f4xx_it.o: ..\..\User\./systick/bsp_systick.h
+..\..\output\stm32f4xx_it.o: ..\..\User\./LCD/lcd.h
+..\..\output\stm32f4xx_it.o: ..\..\User\common.h
+..\..\output\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\stm32f4xx_it.o: ..\..\User\./can/can.h

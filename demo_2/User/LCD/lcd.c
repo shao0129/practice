@@ -1,5 +1,6 @@
 #include "lcd.h"
 #include "cfont.h"
+#include "./systick/bsp_systick.h"
 
 /*********************************************************************************
 **********************启明欣欣 STM32F407应用开发板(高配版)************************
@@ -930,7 +931,35 @@ void LCD_DisplayNum_color(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode,u16 brushco
 	BACK_COLOR=bk_color;
 }
 
+/****************************************************************************
+* 名    称: void LCD_DisplayNum_color(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode)
+* 功    能：在指定位置显示一串自定义颜色的数字
+* 入口参数：x,y:起点坐标
+            num:数值;	 
+            len:长度(即要显示的位数)
+            size:字体大小
+            mode: 0：高位为0不显示
+                  1：高位为0显示0
+            brushcolor：自定义画笔颜色
+            backcolor： 自定义背景颜色
+* 返回参数：无
+* 说    明：  
+****************************************************************************/
+void LCD_DisplayCan(u16 y,u32 ID,CanRxMsg* RxMessage)
+{
+	if((RxMessage->ExtId)==ID)
+	{
+		LCD_DisplayNum(0,y,RxMessage->Data[0],2,24,1);
+		LCD_DisplayNum(36*1,y,RxMessage->Data[1],2,24,1);
+		LCD_DisplayNum(36*2,y,RxMessage->Data[2],2,24,1);
+		LCD_DisplayNum(36*3,y,RxMessage->Data[3],2,24,1);
+		LCD_DisplayNum(36*4,y,RxMessage->Data[4],2,24,1);
+		LCD_DisplayNum(36*5,y,RxMessage->Data[5],2,24,1);
+		LCD_DisplayNum(36*6,y,RxMessage->Data[6],2,24,1);
+		LCD_DisplayNum(36*7,y,RxMessage->Data[7],2,24,1);
+	}
 
+}
 
 
 

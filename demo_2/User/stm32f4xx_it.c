@@ -29,7 +29,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_it.h"
-
+#include "./can/can.h"
 
 /** @addtogroup Template_Project
   * @{
@@ -164,7 +164,17 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
-
+/**
+  * @brief  CAN1接收中断服务函数
+  * @param  None
+  * @retval None
+  */
+u8 RECIVEfLAG=0;
+void CAN1_RX0_IRQHandler(void)
+{
+  	RECIVEfLAG=1;
+    CAN_Receive(CAN1, 0, &RxMessage);
+}
 /**
   * @brief  This function handles PPP interrupt request.
   * @param  None
