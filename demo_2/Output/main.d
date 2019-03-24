@@ -42,3 +42,4 @@
 ..\..\output\main.o: ..\..\User\common.h
 ..\..\output\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\..\output\main.o: ..\..\User\./can/can.h
+..\..\output\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

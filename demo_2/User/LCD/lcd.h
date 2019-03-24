@@ -78,6 +78,7 @@ void Set_Display_Mode(u8 mode);
 void LCD_Fill_onecolor(u16 sx,u16 sy,u16 ex,u16 ey,u16 color);		//填充单个颜色
 void LCD_Draw_Picture(u16 sx,u16 sy,u16 ex,u16 ey,u16 *color);		//填充指定颜色
 void LCD_DisplayChar(u16 x,u16 y,u8 word,u8 size);						      //显示一个字符
+void LCD_DisplayChar_Nospace(u16 x,u16 y,u8 word,u8 size);	
 void LCD_DisplayString(u16 x,u16 y,u8 size,u8 *p);		           //显示一个12/16/24字体字符串
 void LCD_DisplayString_color(u16 x,u16 y,u8 size,u8 *p,u16 brushcolor,u16 backcolor); //显示一个12/16/24字体自定义颜色的字符串
 void LCD_DisplayNum(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode);				//显示 数字

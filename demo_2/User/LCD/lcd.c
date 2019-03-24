@@ -797,7 +797,49 @@ void LCD_DisplayChar(u16 x,u16 y,u8 word,u8 size)
 		      }   	 
 	    }       	 	  
 }   
+/****************************************************************************
+* 名    称: void LCD_DisplayChar(u16 x,u16 y,u8 num,u8 size)
+* 功    能：在指定位置显示一个字符
+* 入口参数：x,y:起始坐标
+            word:要显示的字符:abcdefg1234567890...
+            size:字体大小 12/16/24
+* 返回参数：无
+* 说    明：该字模取模方向为先从左到右，再从上到下  低位在前  
+****************************************************************************/
+void LCD_DisplayChar_Nospace(u16 x,u16 y,u8 word,u8 size)
+{  							  
+  u8  bytenum,bytedata, a,b;
+	
+	u16 xmid=x;   //存储初始X值(位置)			     
+	 
+	if(size==12) bytenum=12;        //从字库数组中可知道每种字体单个字符所占的字节数
+	else if(size==16) bytenum=16;
+	else if(size==24) bytenum=48;
+	else return;    //其他字体退出
+	                
+	//word=word-' ';  //字库数组是按ASCII表排列
+  //cfont.h中字库是从空格开始的 空格就是第一个元素 其他字符的ASCII码减去空格后就得到在数组中的偏移值(位置) 
+	    for(b=0;b<bytenum;b++)
+	    {   
+					if(size==12)bytedata=char_1206[word][b]; 	 	  //调用1206字体
+					else if(size==16)bytedata=char_1608[word][b];	//调用1608字体
+					else if(size==24)bytedata=char_2412[word][b];	//调用2412字体
 
+					for(a=0;a<8;a++)   
+					{	   
+						if(bytedata&0x01) LCD_Color_DrawPoint(x,y,BRUSH_COLOR); //由于子模是低位在前 所以先从低位判断  为1时显示画笔颜色      
+						else LCD_Color_DrawPoint(x,y,BACK_COLOR);               //0时显示背景颜色		
+						bytedata>>=1;    //低位判断完 依次往高位判断
+						x++;	           //显示完一位 往下一位显示 
+						if((x-xmid)==size/2)  //x方向超出字体大小 如：16字体 实际是 08*16的点阵  故这边 size/2
+						{
+							x=xmid;  //从初始X位置在写下一行
+							y++;     //上一行写完 从下一行再写
+							break;   //跳出for(a=0;a<8;a++)循环
+						}
+		      }   	 
+	    }       	 	  
+}   
 /****************************************************************************
 * 名    称: void LCD_DisplayString(u16 x,u16 y,u8 size,u8 *p)
 * 功    能：显示字符串
@@ -947,17 +989,16 @@ void LCD_DisplayNum_color(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode,u16 brushco
 ****************************************************************************/
 void LCD_DisplayCan(u16 y,u32 ID,CanRxMsg* RxMessage)
 {
-	if((RxMessage->ExtId)==ID)
-	{
-		LCD_DisplayNum(0,y,RxMessage->Data[0],2,24,1);
-		LCD_DisplayNum(36*1,y,RxMessage->Data[1],2,24,1);
-		LCD_DisplayNum(36*2,y,RxMessage->Data[2],2,24,1);
-		LCD_DisplayNum(36*3,y,RxMessage->Data[3],2,24,1);
-		LCD_DisplayNum(36*4,y,RxMessage->Data[4],2,24,1);
-		LCD_DisplayNum(36*5,y,RxMessage->Data[5],2,24,1);
-		LCD_DisplayNum(36*6,y,RxMessage->Data[6],2,24,1);
-		LCD_DisplayNum(36*7,y,RxMessage->Data[7],2,24,1);
-	}
+
+		LCD_DisplayNum(0,y*24,ID,8,24,1);
+		LCD_DisplayNum(36*4,y*24,RxMessage->Data[0],2,24,1);
+		LCD_DisplayNum(36*5,y*24,RxMessage->Data[1],2,24,1);
+		LCD_DisplayNum(36*6,y*24,RxMessage->Data[2],2,24,1);
+		LCD_DisplayNum(36*7,y*24,RxMessage->Data[3],2,24,1);
+		LCD_DisplayNum(36*8,y*24,RxMessage->Data[4],2,24,1);
+		LCD_DisplayNum(36*9,y*24,RxMessage->Data[5],2,24,1);
+		LCD_DisplayNum(36*10,y*24,RxMessage->Data[6],2,24,1);
+		LCD_DisplayNum(36*11,y*24,RxMessage->Data[7],2,24,1);
 
 }
 
